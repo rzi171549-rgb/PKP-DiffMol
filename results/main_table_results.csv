@@ -1,0 +1,8 @@
+dataset,seed,test_auc,test_auc_percent,config_file,note
+BACE,350,0.872088923665449487,87.20889236654495,configs/final/bace.yaml,stage C route; selected_beta=1.0
+BBBP,53,0.7837577160493827,78.37577160493827,configs/final/bbbp.yaml,final public release config value
+MUV,134,0.8449059560522995,84.49059560522994,configs/final/muv.yaml,final public release config value
+SIDER,10,0.6692227103178652,66.92227103178652,configs/final/sider.yaml,final public release config value
+Tox21,0,0.7851852709742264,78.51852709742263,configs/final/tox21.yaml,final public release config value
+ToxCast,2,0.6839618884401093,68.39618884401093,configs/final/toxcast.yaml,reported G4 68.40 result
+ClinTox,21,0.9980763215514545,99.80763215514546,configs/final/clintox.yaml,final public release config value

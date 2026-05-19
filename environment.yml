@@ -1,0 +1,17 @@
+name: pkpdiffmol
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.9
+  - pytorch
+  - numpy
+  - scikit-learn
+  - lmdb
+  - pyyaml
+  - transformers
+  - rdkit
+  - tqdm
+  - pandas
+

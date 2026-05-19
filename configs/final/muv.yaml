@@ -1,0 +1,54 @@
+dataset: MUV
+method: PKP-DiffMol
+group: G4
+final_protocol: formal4fix_v2
+seed: 134
+
+result:
+  test_auc: 0.8449059560522995
+  test_auc_percent: 84.49059560522994
+  valid_auc: 0.7562485107855899
+  valid_auc_percent: 75.62485107855899
+  best_epoch: 9
+
+training:
+  runner: scripts/train.py
+  implementation: muv_formal4fix_v2
+
+optimization:
+  epochs: 40
+  batch_size: 128
+  lr: 2e-05
+  warmup_ratio: 0.2
+  weight_decay: 0.01
+  grad_clip: 1.0
+  scheduler: cosine
+
+dropout:
+  pooler_dropout: 0.1
+  desc_dropout: 0.0
+  fusion_dropout: 0.0
+  desc_text_fusion_dropout: 0.1
+
+representation:
+  fusion_mode: residual
+  fusion_alpha_init: 0.005
+  text_encoder_name_or_path: assets/text_encoder_name_or_path
+
+diffusion:
+  diffusion_epochs: 30
+  diffusion_lr: 0.001
+  synthetic_rho: 0.03
+  qgate_quantile: 0.975
+  stage_c_epochs: 18
+  stage_c_batch_size: 256
+  stage_c_lr: 0.00022
+  stage_c_weight_decay: 0.005
+  stage_c_grad_clip: 1.0
+  stage_c_train_scope: head_light
+  final_eval_mode: val_tuned_blend
+
+paths:
+  checkpoint: assets/smi_editor.pt
+  dictionary: assets/smi_dict_token.txt
+  data_dir: data/muv

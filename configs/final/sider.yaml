@@ -1,0 +1,52 @@
+dataset: SIDER
+method: PKP-DiffMol
+group: formal4_successor_S2
+final_protocol: sider_formal4_s2_blend_seed10
+seed: 10
+
+result:
+  test_auc: 0.6692227103178652
+  test_auc_percent: 66.92227103178652
+  valid_auc: 0.6001172284363206
+  best_epoch: 7
+
+training:
+  runner: scripts/train.py
+  implementation: sider_formal4_s2
+
+optimization:
+  epochs: 100
+  batch_size: 32
+  lr: 0.0005
+  warmup_ratio: 0.4
+  weight_decay: 0.01
+  grad_clip: 1.0
+  scheduler: cosine
+
+dropout:
+  pooler_dropout: 0.0
+  desc_dropout: 0.0
+  fusion_dropout: 0.0
+  desc_text_fusion_dropout: 0.1
+
+representation:
+  fusion_mode: residual
+  fusion_alpha_init: 0.005
+  text_encoder_name_or_path: assets/text_encoder_name_or_path
+
+diffusion:
+  diffusion_epochs: 30
+  diffusion_lr: 0.001
+  synthetic_rho: 0.04
+  qgate_quantile: 0.97
+  stage_c_epochs: 18
+  stage_c_batch_size: 256
+  stage_c_lr: 0.00025
+  stage_c_weight_decay: 0.005
+  stage_c_grad_clip: 1.0
+  final_eval_mode: blend
+
+paths:
+  checkpoint: assets/smi_editor.pt
+  dictionary: assets/smi_dict_token.txt
+  data_dir: data/sider

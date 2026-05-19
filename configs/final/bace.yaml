@@ -1,0 +1,51 @@
+dataset: BACE
+method: PKP-DiffMol
+group: G4
+final_protocol: bace_stagec_residual_mix
+seed: 350
+
+result:
+  test_auc: 0.872088923665449487
+  test_auc_percent: 87.2088923665449487
+
+
+training:
+  runner: scripts/train.py
+  implementation: bace_stagec_residual_mix
+
+optimization:
+  epochs: 18
+  batch_size: 32
+  lr: 8e-05
+  warmup_ratio: 0.08
+  weight_decay: 0.01
+  grad_clip: 0.8
+  scheduler: cosine
+
+dropout:
+  pooler_dropout: 0.3
+  desc_dropout: 0.1
+  fusion_dropout: 0.15
+  desc_text_fusion_dropout: 0.1
+
+representation:
+  fusion_mode: residual
+  fusion_alpha_init: 0.005
+  text_encoder_name_or_path: assets/text_encoder_name_or_path
+
+diffusion:
+  diffusion_epochs: 10
+  diffusion_num_timesteps: 30
+  diffusion_lr: 0.0006
+  synthetic_rho: 0.03
+  qgate_quantile: 0.95
+  stage_c_epochs: 12
+  stage_c_batch_size: 64
+  stage_c_lr: 0.00015
+  stage_c_weight_decay: 0.01
+  stage_c_grad_clip: 1.0
+
+paths:
+  checkpoint: assets/smi_editor.pt
+  dictionary: assets/smi_dict_token.txt
+  data_dir: data/bace

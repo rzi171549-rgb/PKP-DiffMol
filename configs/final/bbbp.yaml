@@ -1,0 +1,53 @@
+dataset: BBBP
+method: PKP-DiffMol
+group: G4
+final_protocol: bbbp_pooler_latentdiff
+seed: 53
+
+result:
+  test_auc: 0.7837577160493827
+  test_auc_percent: 78.37577160493827
+  valid_auc: 0.9851637956785821
+  valid_auc_percent: 98.51637956785821
+  best_epoch: 11
+
+training:
+  runner: scripts/train.py
+  implementation: bbbp_pooler_latentdiff
+
+optimization:
+  epochs: 40
+  batch_size: 64
+  lr: 0.0003
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  grad_clip: 0.8
+  scheduler: cosine
+
+dropout:
+  pooler_dropout: 0.15
+  desc_dropout: 0.15
+  fusion_dropout: 0.25
+  desc_text_fusion_dropout: 0.25
+
+representation:
+  fusion_mode: residual
+  fusion_alpha_init: 0.005
+  text_encoder_name_or_path: assets/text_encoder_name_or_path
+
+diffusion:
+  diffusion_epochs: 30
+  diffusion_num_timesteps: 50
+  diffusion_lr: 0.001
+  synthetic_rho: 0.05
+  qgate_quantile: 0.99
+  stage_c_epochs: 15
+  stage_c_batch_size: 256
+  stage_c_lr: 0.0003
+  stage_c_weight_decay: 0.0
+  stage_c_grad_clip: 1.0
+
+paths:
+  checkpoint: assets/smi_editor.pt
+  dictionary: assets/smi_dict_token.txt
+  data_dir: data/bbbp
